@@ -1,0 +1,43 @@
+.formAddNews {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 60px;
+}
+
+.formAddNews input,
+.formAddNews textarea {
+    width: 100%;
+    box-shadow: 0 0 20px 1px #ecedee;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border: none;
+
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+.formAddNews input {
+    height: 40px;
+    padding: 0 16px;
+    margin-bottom: 40px;
+}
+
+.formAddNews textarea {
+    height: 180px;
+    padding: 24px 16px;
+    margin-bottom: 40px;
+}
+
+.button {
+    composes: button from "../App/index.css";
+}
+
+.btnName {
+    composes: btnName from "../App/index.css";
+}
+
+
+

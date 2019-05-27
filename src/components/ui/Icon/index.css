@@ -1,0 +1,10 @@
+.btnIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.newsIcon {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}
