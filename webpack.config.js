@@ -63,12 +63,12 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'index.css',
-      }),
+        }),
         new HtmlWebpackPlugin({
             template: './src/index.html',
         }),
         new webpack.DefinePlugin({
-			__DEV__: JSON.stringify(isDev),
+            __DEV__: JSON.stringify(isDev),
 		}),
     ],
 };

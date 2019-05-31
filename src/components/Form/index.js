@@ -3,39 +3,30 @@ import React, { PureComponent } from 'react';
 import Icon from '../ui/Icon';
 import styles from './index.css';
 
-class Form extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: 1,
-            title: '',
-            text: '',
-        };
-        this.textChange = this.textChange.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-    }
+export default class Form extends PureComponent {
+    state = {
+        id: 1,
+        title: '',
+        text: '',
+    };
 
-    textChange(e) {
+    textChange = (e) => {
         this.setState({
             [e.target.name]: e ? e.target.value : '',
         });
     }
 
-    submitForm(e) {
+    submitForm = (e) => {
         e.preventDefault();
-
         const { id, title, text } = this.state;
         const { handleAction } = this.props;
-
         const newItem = {
             id,
             title,
             text,
         };
-
         handleAction(newItem);
         this.textChange(e);
-
         this.setState({
             title: '',
             text: '',
@@ -51,7 +42,7 @@ class Form extends PureComponent {
                   type="text"
                   name="title"
                   value={title}
-                  onChange={e => this.textChange(e)}
+                  onChange={this.textChange}
                   placeholder="Введите название новости"
                 />
                 <textarea
@@ -59,7 +50,7 @@ class Form extends PureComponent {
                   required
                   name="text"
                   value={text}
-                  onChange={e => this.textChange(e)}
+                  onChange={this.textChange}
                 />
                 <button className={styles.button} type="submit">
                     <Icon name="add" />
@@ -69,5 +60,3 @@ class Form extends PureComponent {
         );
     }
 }
-
-export default Form;
