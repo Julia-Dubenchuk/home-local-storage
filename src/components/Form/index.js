@@ -1,62 +1,53 @@
-import React, { PureComponent } from 'react';
-
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Icon from '../ui/Icon';
 import styles from './index.css';
+import { getNews } from '../../actions';
 
-export default class Form extends PureComponent {
-    state = {
-        id: 1,
-        title: '',
-        text: '',
-    };
+const Form = () => {
+    const [title, titleChange] = useState('');
+    const [text, textChange] = useState('');
+    const dispatch = useDispatch();
+    const news = item => dispatch(getNews(item));
 
-    textChange = (e) => {
-        this.setState({
-            [e.target.name]: e ? e.target.value : '',
-        });
-    }
-
-    submitForm = (e) => {
+    function submitForm(e) {
         e.preventDefault();
-        const { id, title, text } = this.state;
-        const { handleAction } = this.props;
         const newItem = {
-            id,
+            id: Date.now(),
             title,
             text,
         };
-        handleAction(newItem);
-        this.textChange(e);
-        this.setState({
-            title: '',
-            text: '',
-        });
+        const localNews = JSON.parse(window.localStorage.getItem('news'));
+        window.localStorage.setItem('news', JSON.stringify(localNews ? [
+            newItem, ...localNews] : [newItem]));
+        news(newItem);
+        textChange('');
+        titleChange('');
     }
 
-    render() {
-        const { title, text } = this.state;
-        return (
-            <form className={styles.formAddNews} id="form" onSubmit={this.submitForm}>
-                <input
-                  required
-                  type="text"
-                  name="title"
-                  value={title}
-                  onChange={this.textChange}
-                  placeholder="Введите название новости"
-                />
-                <textarea
-                  placeholder="Введите содержание"
-                  required
-                  name="text"
-                  value={text}
-                  onChange={this.textChange}
-                />
-                <button className={styles.button} type="submit">
-                    <Icon name="add" />
-                    <span className={styles.btnName}>Добавить</span>
-                </button>
-            </form>
-        );
-    }
-}
+    return (
+        <form className={styles.formAddNews} id="form" onSubmit={submitForm}>
+            <input
+              required
+              type="text"
+              name="title"
+              value={title}
+              onChange={e => titleChange(e.target.value)}
+              placeholder="Введите название новости"
+            />
+            <textarea
+              placeholder="Введите содержание"
+              required
+              name="text"
+              value={text}
+              onChange={e => textChange(e.target.value)}
+            />
+            <button className={styles.button} type="submit">
+                <Icon name="add" />
+                <span className={styles.btnName}>Добавить</span>
+            </button>
+        </form>
+    );
+};
+
+export default Form;

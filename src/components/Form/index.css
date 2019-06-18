@@ -32,12 +32,9 @@
 }
 
 .button {
-    composes: button from "../App/index.css";
+    composes: button from "../NewsList/index.css";
 }
 
 .btnName {
-    composes: btnName from "../App/index.css";
+    composes: btnName from "../NewsList/index.css";
 }
-
-
-

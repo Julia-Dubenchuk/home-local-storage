@@ -51,6 +51,18 @@ module.exports = {
 				],
             },
             {
+				test: /\.(png|jpe?g|gif)$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'images/[hash].[ext]',
+						},
+					},
+				],
+			},
+            {
 				test: /\.(svg)$/,
 				exclude: /node_modules/,
 				use: [
